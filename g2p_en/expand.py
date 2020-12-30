@@ -60,13 +60,13 @@ def _expand_number(m):
         if num == 2000:
             return 'two thousand'
         elif num > 2000 and num < 2010:
-            return 'two thousand ' + _inflect.number_to_words(num % 100)
+            return 'two thousand ' + _inflect.number_to_words(num % 100).replace('-', ' ')
         elif num % 100 == 0:
-            return _inflect.number_to_words(num // 100) + ' hundred'
+            return _inflect.number_to_words(num // 100).replace('-', ' ') + ' hundred'
         else:
-            return _inflect.number_to_words(num, andword='', zero='oh', group=2).replace(', ', ' ')
+            return _inflect.number_to_words(num, andword='', zero='oh', group=2).replace(', ', ' ').replace('-', ' ')
     else:
-        return _inflect.number_to_words(num, andword='')
+        return _inflect.number_to_words(num, andword='').replace('-', ' ')
 
 
 def normalize_numbers(text):
