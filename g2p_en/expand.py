@@ -51,7 +51,8 @@ def _expand_dollars(m):
 
 
 def _expand_ordinal(m):
-    return _inflect.number_to_words(m.group(0))
+    #return _inflect.number_to_words(m.group(0))
+    return _inflect.number_to_words(m.group(0)).replace(',', '')
 
 
 def _expand_number(m):
@@ -60,13 +61,13 @@ def _expand_number(m):
         if num == 2000:
             return 'two thousand'
         elif num > 2000 and num < 2010:
-            return 'two thousand ' + _inflect.number_to_words(num % 100).replace('-', ' ')
+            return 'two thousand ' + _inflect.number_to_words(num % 100).replace('-', ' ').replace(',', '')
         elif num % 100 == 0:
-            return _inflect.number_to_words(num // 100).replace('-', ' ') + ' hundred'
+            return _inflect.number_to_words(num // 100).replace('-', ' ').replace(',', '') + ' hundred'
         else:
-            return _inflect.number_to_words(num, andword='', zero='oh', group=2).replace(', ', ' ').replace('-', ' ')
+            return _inflect.number_to_words(num, andword='', zero='oh', group=2).replace(', ', ' ').replace('-', ' ').replace(',', '')
     else:
-        return _inflect.number_to_words(num, andword='').replace('-', ' ')
+        return _inflect.number_to_words(num, andword='').replace('-', ' ').replace(',', '')
 
 
 def normalize_numbers(text):
